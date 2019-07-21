@@ -1,4 +1,5 @@
 /projeto-webpack/client/node_modules/
-/projeto-webpack/__MACOSX
+/projeto-webpack/server/node_modules/
+/__MACOSX/
 /projeto-webpack/client/package-lock.json
 #*.DS_Store
