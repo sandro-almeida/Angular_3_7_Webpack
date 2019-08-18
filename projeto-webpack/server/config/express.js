@@ -6,9 +6,11 @@ var express = require('express')
     ,path =  require('path')
     ,bodyParser = require('body-parser');
 
+/* With this comment below then Backend (http://localhost:3000/) is no longer available via browser
 app.set('clientPath', path.join(__dirname, '../..', 'client'));
 console.log(app.get('clientPath'));
 app.use(express.static(app.get('clientPath')));
+*/
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
