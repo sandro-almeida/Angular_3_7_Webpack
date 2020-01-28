@@ -1,7 +1,12 @@
 const path = require('path');   //https://nodejs.org/api/path.html
 const babiliPlugin = require('babili-webpack-plugin');
+const extractTextPlugin = require('extract-text-webpack-plugin');
 
 let plugins = [];
+
+plugins.push(
+    new extractTextPlugin("styles.css")
+);
 
 if (process.env.NODE_ENV == 'production') {
     plugins.push(new babiliPlugin());
@@ -25,7 +30,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,    //"exclude: /node_modules/": not necessary as the css files are in this directory (as they were installed via npm)
-                loader: 'style-loader!css-loader'    //! indicates that one loader will be applied after the other, from Right to Left
+                //loader: 'style-loader!css-loader'    //! indicates that one loader will be applied after the other, from Right to Left
+                use: extractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
