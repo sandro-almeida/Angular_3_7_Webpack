@@ -6,3 +6,5 @@ Go to projeto-webpack/client and run: `npm install`
 Go to projeto-webpack/server and run (application will be available on http://localhost:3000/): `npm start`
 ### To build the application
 Go to projeto-webpack/client and run: `npm run build-dev` or `npm run build-prod`
+### To start the application
+Go to projeto-webpack/client and run: `npm start`
