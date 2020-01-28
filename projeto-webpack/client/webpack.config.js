@@ -3,8 +3,20 @@ const babiliPlugin = require('babili-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
 const optimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let plugins = [];
+
+plugins.push(new HtmlWebpackPlugin({
+    hash: true,
+    minify: {
+        html5: true,
+        collapseWhitespace: true,
+        removeComments: true,
+    },    
+    filename: 'index.html',
+    template: __dirname + '/main.html'   //the main.html was renamed from index.html
+}));
 
 plugins.push(
     new extractTextPlugin("styles.css")
@@ -48,8 +60,8 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',  //this is the generated output file with all dependencies resolved
-        path: path.resolve(__dirname, 'dist'),   //__dirname is the current directory, and dist is a subdirectory where filename will be generated
-        publicPath: 'dist'   //this is the directory where the bundle.js will be created by webpack-dev-server
+        path: path.resolve(__dirname, 'dist')   //__dirname is the current directory, and dist is a subdirectory where filename will be generated
+        //publicPath: 'dist'   //this is the directory where the bundle.js will be created by webpack-dev-server
     },
     module: {
         rules: [                            //we can have many rules
