@@ -38,7 +38,12 @@ plugins.push(
     )
 );
 
+let SERVICE_URL = JSON.stringify('http://localhost:3000'); //do not forget the JSON.stringify()
+
 if (process.env.NODE_ENV == 'production') {
+
+    SERVICE_URL = JSON.stringify('http://endereco-da-sua-api-em-PRD');
+
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); //this command is for fast processing (from webpack version 3); allows our code to run faster in browsers
     plugins.push(new babiliPlugin());
 
@@ -52,6 +57,8 @@ if (process.env.NODE_ENV == 'production') {
         canPrint: true
     }));
 }
+
+plugins.push(new webpack.DefinePlugin({ SERVICE_URL })); //this is a shorthand of SERVICE_URL: SERVICE_URL
 
 module.exports = {
     entry: {
