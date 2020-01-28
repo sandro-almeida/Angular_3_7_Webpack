@@ -17,6 +17,15 @@ plugins.push(
     })
 );
 
+plugins.push(
+    new webpack.optimize.CommonsChunkPlugin(   //plugin to keep our code in one bundled file (ex: bundle.js) and the remaining libraries in another bundled file (ex: vendor.bundle.js)
+        { 
+            name: 'vendor',  //this is the name of the module. It has to be the same name as in entry: {vendor: ...}, in module.exports configuration below
+            filename: 'vendor.bundle.js'
+        }
+    )
+);
+
 if (process.env.NODE_ENV == 'production') {
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); //this command is for fast processing (from webpack version 3); allows our code to run faster in browsers
     plugins.push(new babiliPlugin());
@@ -33,7 +42,10 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 module.exports = {
-    entry: './app-src/app.js',  //this is the first module to be loaded
+    entry: {
+        app: './app-src/app.js',  //this is the first module to be loaded
+        vendor: ['jquery', 'bootstrap', 'reflect-metadata']  //configuring the libraries that will be part of the vendor.bundle.js
+    },
     output: {
         filename: 'bundle.js',  //this is the generated output file with all dependencies resolved
         path: path.resolve(__dirname, 'dist'),   //__dirname is the current directory, and dist is a subdirectory where filename will be generated
