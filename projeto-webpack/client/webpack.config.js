@@ -22,6 +22,11 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'  //loader indicates the loader that will be used
                 }
+            },
+
+            { 
+                test: /\.css$/,    //"exclude: /node_modules/": not necessary as the css files are in this directory (as they were installed via npm)
+                loader: 'style-loader!css-loader'    //! indicates that one loader will be applied after the other, from Right to Left
             }
         ]
     },
