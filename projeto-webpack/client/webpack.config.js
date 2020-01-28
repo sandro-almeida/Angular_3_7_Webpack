@@ -18,6 +18,7 @@ plugins.push(
 );
 
 if (process.env.NODE_ENV == 'production') {
+    plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); //this command is for fast processing (from webpack version 3); allows our code to run faster in browsers
     plugins.push(new babiliPlugin());
 
     plugins.push(new optimizeCSSAssetsPlugin({
